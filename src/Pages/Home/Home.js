@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { authContext } from '../../ContextProvider/ContextProvider';
 // import Lottie from 'lottie-react';
 // import reader from '../../Lottite/cominsoon.json'
 // import Marquee from "react-fast-marquee";
@@ -10,6 +11,8 @@ import RecentPost from './RecentPost/RecentPost';
 
 
 const Home = () => {
+
+    const { search } = useContext(authContext);
     const [gridBlogs, setGridBlogs] = useState([])
 
     const [page, setPage] = useState(0)
@@ -20,14 +23,14 @@ const Home = () => {
 
 
     useEffect(() => {
-        const url = `http://localhost:8000/allblogs?page=${page}&size=${size}`
+        const url = `http://localhost:8000/allblogs?search=${search}&page=${page}&size=${size}`
         fetch(url)
             .then(res => res.json())
             .then(data => {
                 setCount(data.count);
                 setGridBlogs(data.result);
             })
-    }, [page, size])
+    }, [page, size, search])
 
     console.log(gridBlogs);
     const allBlogs = useGetAllBlogsQuery();

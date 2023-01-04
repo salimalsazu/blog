@@ -7,6 +7,7 @@ import { FaFacebookF } from 'react-icons/fa';
 import { BsTwitter } from 'react-icons/bs';
 import { BsInstagram } from 'react-icons/bs';
 import { ImSearch } from 'react-icons/im';
+// import { TextField } from '@mui/material';
 
 const Header = () => {
 
@@ -21,10 +22,12 @@ const Header = () => {
     //     }
     // })
 
-    const { user, logOut } = useContext(authContext);
+    const { user, logOut, searchRef, setSearch } = useContext(authContext);
     const [userAll, setUserAll] = useState([]);
 
-
+    const handleSearch = () => {
+        setSearch(searchRef.current.value)
+    }
 
     useEffect(() => {
         // console.log(user.email);
@@ -114,8 +117,9 @@ const Header = () => {
                     <div>
                         <Link to="/" className=" text-6xl lg:mb-5"><button><span className=' text-gray-300'>dev</span>Blog </button></Link>
                     </div>
-                    <div>
-                        <ImSearch className='text-3xl'></ImSearch>
+                    <div className='flex items-center'>
+                        <input ref={searchRef} type="text" id="url" placeholder="Serach Blog" className="flex flex-1 py-2 px-2  sm:text-sm rounded-r-md " />
+                        <button onClick={handleSearch} ><ImSearch className='text-3xl ml-3'></ImSearch></button>
                     </div>
                 </div>
                 <div className="navbar-end w-full mr-20 hidden lg:flex">
