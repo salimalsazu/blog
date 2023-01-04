@@ -7,7 +7,7 @@ const UserBlogs = ({ b }) => {
 
     return (
         <div className='lg:mt-0 mt-10 w-full '>
-            <div className="flex flex-col bg-gray-800  p-6 space-y-6 overflow-hidden rounded-lg shadow-md w-full">
+            <div className="flex flex-col bg-white  p-6 space-y-6 overflow-hidden rounded-lg shadow-sm w-full">
                 <div className="flex space-x-4">
                     <img alt="" src={b.image} className="object-cover w-12 h-12 rounded-full shadow dark:bg-gray-500" />
                     <div className="flex flex-col items-start">
@@ -17,7 +17,7 @@ const UserBlogs = ({ b }) => {
                 </div>
                 <div>
                     <h2 className="mb-1 text-xl font-semibold">{b.blogtitle}</h2>
-                    <p className="text-sm ">{b.blog}</p>
+                    <p className="text-sm ">{b.blog.slice(0, 500)}...</p>
                 </div>
                 <div className="flex flex-wrap justify-between">
                     <div className="space-x-2">

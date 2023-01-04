@@ -5,7 +5,7 @@ import cover from '../../image/blog.jpg'
 import { CiLocationOn } from 'react-icons/ci';
 import { authContext } from '../../ContextProvider/ContextProvider';
 import UserBlogs from '../../Blogs/UserBlogs';
-
+import Swal from 'sweetalert2'
 
 
 
@@ -43,6 +43,7 @@ const ProfileDetails = ({ p }) => {
     const posttime = new Date().toLocaleString();
 
     const handleBlog = (data) => {
+
         const blogPost = {
             blogtitle: data.blogtitle,
             blog: data.blog,
@@ -64,6 +65,7 @@ const ProfileDetails = ({ p }) => {
             .then(res => res.json())
             .then(result => {
                 console.log(result);
+                Swal.fire('Your blog is Posted')
             })
     }
 
@@ -80,8 +82,8 @@ const ProfileDetails = ({ p }) => {
             <div className='flex'>
 
 
-                <div className=' shadow-md px-5 w-1/5 h-auto rounded-lg  mt-5 hidden lg:block'>
-                    <div className=' bg-gray-900 shadow-lg text-start  p-5 mt-5 rounded-md'>
+                <div className='px-5 w-1/5 h-auto rounded-lg  mt-5 hidden lg:block'>
+                    <div className=' bg-white shadow-sm text-start  p-5 mt-5 rounded-md'>
                         <div className='p-3'>
                             <h1 className='text-xl  font-bold mb-1' >Intro</h1>
                             <p className='text-xs font-extralight' >{p.intro}</p>
@@ -93,19 +95,19 @@ const ProfileDetails = ({ p }) => {
                         </div>
                     </div>
                     <div className='mt-5' >
-                        <h1 className='font-extrabold shadow-md p-2' >DASHBOARD</h1>
+                        <h1 className='font-extrabold shadow-sm p-2' >DASHBOARD</h1>
                     </div>
                 </div>
 
 
                 <div className=' lg:mt-0 mt-10 w-full lg:w-3/5 '>
                     <div >
-                        <form onSubmit={handleSubmit(handleBlog)} action="" className='flex flex-col  items-end mx-5 bg-gray-800 p-5'>
+                        <form onSubmit={handleSubmit(handleBlog)} action="" className='flex flex-col  items-end mx-5 bg-white p-5'>
                             {/* <input {...register('blogstitle')} type="text" name="blogtitle" id="" placeholder='Title' className='p-5 w-full h-5 mb-5 shadow-sm rounded-lg' /> */}
 
-                            <input {...register('blogtitle', { required: 'Field is required' })} placeholder='Title' className='p-5 w-full h-5 mb-5 shadow-sm rounded-lg' />
+                            <input {...register('blogtitle', { required: 'Field is required' })} placeholder='Title' className='p-5 w-full h-5 mb-5 shadow-sm bg-gray-100 rounded-lg' />
 
-                            <textarea {...register('blog')} name="blog" id="" cols="30" rows="10" className='p-5 w-full  h-16  mb-5 shadow-sm rounded-lg' placeholder='Write Your Blog...'></textarea>
+                            <textarea {...register('blog')} name="blog" id="" cols="30" rows="10" className='p-5 w-full  h-16  mb-5 shadow-sm bg-gray-100 rounded-lg' placeholder='Write Your Blog...'></textarea>
                             <Button type='submit' variant="outlined" className='w-10 h-5 text-right text-yellow-400'>
                                 Post
                             </Button>
@@ -123,20 +125,20 @@ const ProfileDetails = ({ p }) => {
                 </div>
 
 
-                <div className=' shadow-md px-5 w-1/5 hidden lg:block'>
-                    <div className=' bg-gray-800 rounded-md p-5 mt-5 shadow-md'>
+                <div className='  px-5 w-1/5 hidden lg:block'>
+                    <div className=' bg-white rounded-sm p-5 mt-5 shadow-sm'>
                         <h1 className='mb-5 font-extrabold' >Your Latest Blog</h1>
                         <ul className='text-left'>
                             {
                                 userBlog.length === 0 && "No Blog Posted "
                             }
                             {
-                                userBlog?.slice(0, 15).map(b => <h1>{b.blog}</h1>)
+                                userBlog?.map((b, i) => <h1 key={b._id} ><span>{i + 1}. </span>{b.blogtitle.slice(0, 25)}...</h1>)
                             }
                         </ul>
                     </div>
 
-                    <div className=' bg-gray-800 rounded-md mt-5 p-5 shadow-md'>
+                    <div className=' bg-white rounded-md mt-5 p-5 shadow-sm'>
                         <h1 className='mb-5 font-extrabold' >Your Favourite Blog </h1>
                         <ul className='text-left'>
                             <li> No Favourite Blog</li>

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import Lottie from 'lottie-react';
 import reader from '../../Lottite/login.json'
 import { useForm } from 'react-hook-form';
-import { Button, TextField } from '@mui/material';
+import { Button, makeStyles, TextField } from '@mui/material';
 import { authContext } from '../../ContextProvider/ContextProvider';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
@@ -58,6 +58,7 @@ const Log = () => {
             <div className='flex flex-col justify-center items-center w-2/3 color'>
                 <form action="" onSubmit={handleSubmit(handleLogin)} className="flex flex-col gap-8 color lg:mt-52">
                     <TextField
+
                         label="Type Your Email"
                         type="email"
                         {...register('email')}

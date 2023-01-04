@@ -3,6 +3,11 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { authContext } from '../../ContextProvider/ContextProvider';
 
+import { FaFacebookF } from 'react-icons/fa';
+import { BsTwitter } from 'react-icons/bs';
+import { BsInstagram } from 'react-icons/bs';
+import { ImSearch } from 'react-icons/im';
+
 const Header = () => {
 
     // const { firstname, lastname } = u;
@@ -47,9 +52,6 @@ const Header = () => {
 
     // console.log(userAll);
 
-    const logo = "devBlog"
-
-
 
     const handleSignOut = () => {
         logOut()
@@ -60,11 +62,11 @@ const Header = () => {
 
     const navBar = <React.Fragment>
         {user?.uid || user?.email ?
-            <>
+            <div className='flex flex-col lg:flex-row items-center '>
 
                 <div className="dropdown">
-                    <label tabIndex={0} className="btn m-1">Profile</label>
-                    <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
+                    <label tabIndex={0} className="btn btn-sm" >Profile</label>
+                    <ul tabIndex={0} className="dropdown-content menu text-xs shadow bg-base-100 rounded-box w-28">
                         {
                             userAll?.map(u => <>
 
@@ -72,10 +74,11 @@ const Header = () => {
 
                             </>)
                         }
+                        <li><Link to="/" ><button onClick={handleSignOut}>Signout</button></Link></li>
                     </ul>
                 </div>
-                <li><Link to="/" ><button onClick={handleSignOut}>Signout</button></Link></li>
-            </>
+
+            </div>
             :
             <>
                 <li><Link to="/login" >Login</Link></li>
@@ -90,22 +93,32 @@ const Header = () => {
 
 
     return (
-        <div className='text-yellow-400'>
-            <div className="navbar flex justify-center items-center mx-10">
+        <div className='text-{{#4b4870}} text-md font-semibold'>
+            <div className="navbar flex flex-col justify-center items-center ">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                         </label>
-                        <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow  rounded-box w-52 bg-slate-50 text-gray-600">
+                        <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow w-full  rounded-box  bg-slate-50 text-gray-600">
                             {navBar}
                         </ul>
                     </div>
-                    <div className='flex justify-center items-center'>
-                        <Link to="/" className="w-20"><button>{logo}</button></Link>
+                </div>
+                <div className='flex justify-between px-10 items-center w-full lg:mb-10 lg:mt-10 '>
+                    <div className='flex justify-center items-center gap-4' >
+                        <FaFacebookF className='text-2xl' ></FaFacebookF>
+                        <BsTwitter className='text-2xl' ></BsTwitter>
+                        <BsInstagram className='text-2xl' ></BsInstagram>
+                    </div>
+                    <div>
+                        <Link to="/" className=" text-6xl lg:mb-5"><button><span className=' text-gray-300'>dev</span>Blog </button></Link>
+                    </div>
+                    <div>
+                        <ImSearch className='text-3xl'></ImSearch>
                     </div>
                 </div>
-                <div className="navbar-center hidden lg:flex">
+                <div className="navbar-end w-full mr-20 hidden lg:flex">
                     <ul className="menu menu-horizontal p-0 ">
                         {navBar}
                     </ul>
