@@ -64,7 +64,7 @@ const Reg = () => {
                     email: data.email
                 }
 
-                fetch('http://localhost:5000/jwt', {
+                fetch('http://localhost:8000/jwt', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
@@ -81,7 +81,7 @@ const Reg = () => {
                 // console.log(products);
                 //save information to the database 
 
-                fetch('http://localhost:5000/user', {
+                fetch('http://localhost:8000/user', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json',

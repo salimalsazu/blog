@@ -27,7 +27,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/profile/:email",
-                loader: ({ params }) => fetch(`http://localhost:5000/user/${params.email}`),
+                loader: ({ params }) => fetch(`http://localhost:8000/user/${params.email}`),
                 element: <Profiles></Profiles>
             },
             {

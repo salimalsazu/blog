@@ -15,7 +15,7 @@ const Header = () => {
     // const { data: userAll = [] } = useQuery({
     //     queryKey: ['userAll'],
     //     queryFn: async () => {
-    //         const res = await fetch('http://localhost:5000/user');
+    //         const res = await fetch('http://localhost:8000/user');
     //         const data = await res.json();
     //         return data;
     //     }
@@ -30,7 +30,7 @@ const Header = () => {
         // console.log(user.email);
 
         if (user?.email) {
-            fetch(`http://localhost:5000/users?email=${user?.email}`, {
+            fetch(`http://localhost:8000/users?email=${user?.email}`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('profile-token')}`
                 }
@@ -42,7 +42,7 @@ const Header = () => {
                     return res.json()
                 })
                 .then(data => {
-                    console.log(data)
+                    // console.log(data)
                     setUserAll(data);
                 });
         }

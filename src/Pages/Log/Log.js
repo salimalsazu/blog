@@ -28,7 +28,7 @@ const Log = () => {
                     email: user.email
                 }
 
-                fetch('http://localhost:5000/jwt', {
+                fetch('http://localhost:8000/jwt', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'

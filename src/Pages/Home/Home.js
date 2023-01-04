@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 // import Lottie from 'lottie-react';
 // import reader from '../../Lottite/cominsoon.json'
 // import Marquee from "react-fast-marquee";
@@ -10,10 +10,29 @@ import RecentPost from './RecentPost/RecentPost';
 
 
 const Home = () => {
+    const [gridBlogs, setGridBlogs] = useState([])
 
+    const [page, setPage] = useState(0)
+    const [size, setSize] = useState(2)
+    const [count, setCount] = useState(0)
+
+    const pages = Math.ceil(count / size);
+
+
+    useEffect(() => {
+        const url = `http://localhost:8000/allblogs?page=${page}&size=${size}`
+        fetch(url)
+            .then(res => res.json())
+            .then(data => {
+                setCount(data.count);
+                setGridBlogs(data.result);
+            })
+    }, [page, size])
+
+    console.log(gridBlogs);
     const allBlogs = useGetAllBlogsQuery();
 
-    console.log(allBlogs);
+    // console.log(allBlogs);
 
     return (
         <div className='flex flex-col lg:flex-row'>
@@ -21,9 +40,31 @@ const Home = () => {
 
             <div className=' m-4 lg:m-0 lg:w-4/5 lg:p-10' >
 
+                <div className='flex justify-end mt-5 mb-5'>
+                    <h1 className='mr-3 text-gray-500 font-bold' >Select Size</h1>
+                    <select onChange={event => setSize(event.target.value)}><option value="2" selected >2</option>
+                        <option value="4" >4</option>
+                        <option value="6">6</option>
+                        <option value="8">8</option>
+                        <option value="10">10</option>
+
+                    </select>
+                </div>
+
                 <div className='flex flex-col justify-center gap-10' >
                     {
-                        allBlogs?.data?.map(blog => <HomeDetails blog={blog} key={blog._id} ></HomeDetails>)
+                        gridBlogs?.map(blog => <HomeDetails blog={blog} key={blog._id} ></HomeDetails>)
+                    }
+                </div>
+
+                <div className='mt-10 flex justify-center items-center'>
+                    {
+                        [...Array(pages).keys()].map(number => <button key={number}
+
+                            className={page === number && "bg-gray-800 text-white p-2 rounded-md m-2" || "bg-gray-200 text-gray-700 p-2 rounded-md m-2"}
+                            onClick={() => setPage(number)} >
+                            {number + 1}
+                        </button>)
                     }
                 </div>
             </div>

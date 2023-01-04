@@ -17,7 +17,7 @@ const ProfileDetails = ({ p }) => {
 
     useEffect(() => {
         if (user?.email) {
-            fetch(`http://localhost:5000/blogs?email=${user?.email}`, {
+            fetch(`http://localhost:8000/blogs?email=${user?.email}`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('profile-token')}`
                 }
@@ -55,7 +55,7 @@ const ProfileDetails = ({ p }) => {
         }
 
         console.log(blogPost)
-        fetch('http://localhost:5000/blogs', {
+        fetch('http://localhost:8000/blogs', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
