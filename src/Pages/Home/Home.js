@@ -4,7 +4,7 @@ import { authContext } from '../../ContextProvider/ContextProvider';
 // import reader from '../../Lottite/cominsoon.json'
 // import Marquee from "react-fast-marquee";
 
-import { useGetAllBlogsQuery } from '../../DataFetch.js/DataFetch';
+import { useGetAllBlogsQuery, useGetAllCategoryQuery } from '../../DataFetch.js/DataFetch';
 import HomeDetails from './HomeDetails/HomeDetails';
 import RecentPost from './RecentPost/RecentPost';
 
@@ -23,7 +23,7 @@ const Home = () => {
 
 
     useEffect(() => {
-        const url = `http://localhost:8000/allblogs?search=${search}&page=${page}&size=${size}`
+        const url = `https://server-salimalsazu.vercel.app/allblogs?search=${search}&page=${page}&size=${size}`
         fetch(url)
             .then(res => res.json())
             .then(data => {
@@ -34,7 +34,9 @@ const Home = () => {
 
     console.log(gridBlogs);
     const allBlogs = useGetAllBlogsQuery();
+    const allCategory = useGetAllCategoryQuery();
 
+    console.log(allCategory);
     // console.log(allBlogs);
 
     return (
@@ -84,13 +86,19 @@ const Home = () => {
 
                 <div className='flex flex-col items-start mt-44' >
                     <h1 className='text-xl font-extrabold mb-8' >Tag Catagories</h1>
-                    <div className='flex flex-col gap-5'>
 
+                    <div className='grid grid-cols-3 gap-1'>
+                        {
+                            allCategory.data?.map(c => <div key={c._id}>
+                                <button button className='border border-gray-500 px-2 py-1 rounded-xl hover:bg-gray-500 hover:text-white' > {c.category}</button>
+                            </div>)
+                        }
                     </div>
+
 
                 </div>
 
-            </div>
+            </div >
 
 
 
@@ -103,7 +111,7 @@ const Home = () => {
             <div className='w-fit' >
                 <Lottie animationData={reader} loop={true} />
             </div> */}
-        </div>
+        </div >
     );
 };
 

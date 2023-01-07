@@ -6,6 +6,7 @@ import Main from "../Main/Main";
 import Regdone from '../Pages/Reg/Regdone';
 import Profiles from '../Pages/Profile/Profiles';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
+import AddCategory from '../Dashboard/Categories/AddCategory';
 
 
 export const router = createBrowserRouter([
@@ -27,8 +28,12 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/profile/:email",
-                loader: ({ params }) => fetch(`http://localhost:8000/user/${params.email}`),
+                loader: ({ params }) => fetch(`https://server-salimalsazu.vercel.app/user/${params.email}`),
                 element: <Profiles></Profiles>
+            },
+            {
+                path: '/profile/addcategory',
+                element: <AddCategory></AddCategory>
             },
             {
                 path: "regdone",

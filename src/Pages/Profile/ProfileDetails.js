@@ -6,6 +6,7 @@ import { CiLocationOn } from 'react-icons/ci';
 import { authContext } from '../../ContextProvider/ContextProvider';
 import UserBlogs from '../../Blogs/UserBlogs';
 import Swal from 'sweetalert2'
+import { Link } from 'react-router-dom';
 
 
 
@@ -17,7 +18,7 @@ const ProfileDetails = ({ p }) => {
 
     useEffect(() => {
         if (user?.email) {
-            fetch(`http://localhost:8000/blogs?email=${user?.email}`, {
+            fetch(`https://server-salimalsazu.vercel.app/blogs?email=${user?.email}`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('profile-token')}`
                 }
@@ -55,7 +56,7 @@ const ProfileDetails = ({ p }) => {
         }
 
         console.log(blogPost)
-        fetch('http://localhost:8000/blogs', {
+        fetch('https://server-salimalsazu.vercel.app/blogs', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -96,6 +97,7 @@ const ProfileDetails = ({ p }) => {
                     </div>
                     <div className='mt-5' >
                         <h1 className='font-extrabold shadow-sm p-2' >DASHBOARD</h1>
+                        <Link to="/profile/addcategory" >Add Category</Link>
                     </div>
                 </div>
 

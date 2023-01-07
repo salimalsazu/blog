@@ -64,7 +64,7 @@ const Reg = () => {
                     email: data.email
                 }
 
-                fetch('http://localhost:8000/jwt', {
+                fetch('https://server-salimalsazu.vercel.app/jwt', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
@@ -81,7 +81,7 @@ const Reg = () => {
                 // console.log(products);
                 //save information to the database 
 
-                fetch('http://localhost:8000/user', {
+                fetch('https://server-salimalsazu.vercel.app/user', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json',

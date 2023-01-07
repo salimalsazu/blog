@@ -28,7 +28,7 @@ const Log = () => {
                     email: user.email
                 }
 
-                fetch('http://localhost:8000/jwt', {
+                fetch('https://server-salimalsazu.vercel.app/jwt', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'

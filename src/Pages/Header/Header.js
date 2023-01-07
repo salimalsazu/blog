@@ -7,20 +7,9 @@ import { FaFacebookF } from 'react-icons/fa';
 import { BsTwitter } from 'react-icons/bs';
 import { BsInstagram } from 'react-icons/bs';
 import { ImSearch } from 'react-icons/im';
-// import { TextField } from '@mui/material';
 
 const Header = () => {
 
-    // const { firstname, lastname } = u;
-
-    // const { data: userAll = [] } = useQuery({
-    //     queryKey: ['userAll'],
-    //     queryFn: async () => {
-    //         const res = await fetch('http://localhost:8000/user');
-    //         const data = await res.json();
-    //         return data;
-    //     }
-    // })
 
     const { user, logOut, searchRef, setSearch } = useContext(authContext);
     const [userAll, setUserAll] = useState([]);
@@ -33,7 +22,7 @@ const Header = () => {
         // console.log(user.email);
 
         if (user?.email) {
-            fetch(`http://localhost:8000/users?email=${user?.email}`, {
+            fetch(`https://server-salimalsazu.vercel.app/users?email=${user?.email}`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('profile-token')}`
                 }
@@ -45,7 +34,7 @@ const Header = () => {
                     return res.json()
                 })
                 .then(data => {
-                    // console.log(data)
+                    console.log(data)
                     setUserAll(data);
                 });
         }
@@ -53,7 +42,7 @@ const Header = () => {
     }, [user?.email]);
 
 
-    // console.log(userAll);
+    console.log(userAll);
 
 
     const handleSignOut = () => {
@@ -71,7 +60,7 @@ const Header = () => {
                     <label tabIndex={0} className="btn btn-sm" >Profile</label>
                     <ul tabIndex={0} className="dropdown-content menu text-xs shadow bg-base-100 rounded-box w-28">
                         {
-                            userAll?.map(u => <>
+                            userAll && userAll?.map(u => <>
 
                                 <li> <Link to={`/profile/${u.email}`} key={u._id} > {u.firstname} {u.lastname} </Link></li>
 
@@ -108,8 +97,8 @@ const Header = () => {
                         </ul>
                     </div>
                 </div>
-                <div className='flex justify-between px-10 items-center w-full lg:mb-10 lg:mt-10 '>
-                    <div className='flex justify-center items-center gap-4' >
+                <div className='flex flex-col lg:flex-row justify-between px-10 items-center w-full lg:mb-10 lg:mt-10 lg:gap-0 gap-5 '>
+                    <div className='hidden lg:flex justify-center items-center gap-4' >
                         <FaFacebookF className='text-2xl' ></FaFacebookF>
                         <BsTwitter className='text-2xl' ></BsTwitter>
                         <BsInstagram className='text-2xl' ></BsInstagram>
